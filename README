@@ -1,0 +1,3 @@
+CanvasShifter.js
+
+A javascript helper to provide some pixel-shader like functionality to 2d html canvas contexts. 
