@@ -1,3 +1,6 @@
 CanvasShifter.js
 
 A javascript helper to provide some pixel-shader like functionality to 2d html canvas contexts. 
+
+To see a demo, go to the blog post here:
+http://www.appin8.com/blog-post/canvasshifter-js-open-source-2d-canvas-pixel-shaders/
