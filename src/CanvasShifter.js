@@ -23,6 +23,9 @@ THE SOFTWARE.
 function CanvasShifter(imgIn, imgOut, params, pxFunc) {
     this.imgIn = imgIn;
     this.imgOut = imgOut;
+    
+    this.imgInData = imgIn.data; //removing the reference to the imagedata object for speed
+    this.imgOutData = imgOut.data; //removing the reference to the imagedata object for speed
 
     this.pxFunc = pxFunc;
     this.pxParams = params;
@@ -49,22 +52,23 @@ function CanvasShifter(imgIn, imgOut, params, pxFunc) {
 	}
 	
 	CanvasShifter.prototype.output = function() {
+		this.imgOut.data = this.imgOutData;
 		return this.imgOut;
 	}
 	
 	CanvasShifter.prototype.getPx = function(x,y) {
-        return [this.imgIn.data[((y*(this.imgIn.width*4)) + (x*4))],
-                            this.imgIn.data[((y*(this.imgIn.width*4)) + (x*4))+1],
-                            this.imgIn.data[((y*(this.imgIn.width*4)) + (x*4))+2],
-                            this.imgIn.data[((y*(this.imgIn.width*4)) + (x*4))+3]
+        return [this.imgInData[((y*(this.imgIn.width*4)) + (x*4))],
+                this.imgInData[((y*(this.imgIn.width*4)) + (x*4))+1],
+                this.imgInData[((y*(this.imgIn.width*4)) + (x*4))+2],
+                this.imgInData[((y*(this.imgIn.width*4)) + (x*4))+3]
                ];
 	}
 	
 	CanvasShifter.prototype.setPx = function(x,y, pxarray4) {
-		this.imgOut.data[((y*(this.imgIn.width*4)) + (x*4))] = pxarray4[0];
-		this.imgOut.data[((y*(this.imgIn.width*4)) + (x*4))+1] = pxarray4[1];
-		this.imgOut.data[((y*(this.imgIn.width*4)) + (x*4))+2] = pxarray4[2];
-		this.imgOut.data[((y*(this.imgIn.width*4)) + (x*4))+3] = pxarray4[3];
+	    this.imgOutData[((y*(this.imgIn.width*4)) + (x*4))] = pxarray4[0];
+	    this.imgOutData[((y*(this.imgIn.width*4)) + (x*4))+1] = pxarray4[1];
+	    this.imgOutData[((y*(this.imgIn.width*4)) + (x*4))+2] = pxarray4[2];
+	    this.imgOutData[((y*(this.imgIn.width*4)) + (x*4))+3] = pxarray4[3];
 	}
 	
 	CanvasShifter.ImageDataFromImage = function(image, width, height) {
